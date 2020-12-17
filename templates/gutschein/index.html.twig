@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gutschein index{% endblock %}
+
+{% block body %}
+    <h1>Gutscheine</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Betrag</th>
+                <th>Bemerkung</th>
+                <th>Datum</th>
+                <th>Bezahlt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for gutschein in gutscheins %}
+            <tr>
+                <td><a href="{{ path('gutschein_show', {'id': gutschein.id}) }}">{{ gutschein.gsName }}</a></td>
+                <td>{{ (gutschein.gsBetrag/100) | number_format(2, ',', '0')  }}€</td>
+                <td>{{ gutschein.gsBemerkung }}</td>
+                <td>{{ gutschein.gsDate ? gutschein.gsDate|date('d.m.Y') : '' }}</td>
+                <td>{{ gutschein.isPayed ? 'Ja' : 'Nein' }}</td>
+                <td>
+                    <a href="{{ path('gutschein_edit', {'id': gutschein.id}) }}"><i class="fas fa-edit"></i></a>
+                    <a href="{{ path('gutschein_pdf', {'id': gutschein.id}) }}"><i class="fas fa-print"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('gutschein_new') }}">Neuer Gutschein</a>
+{% endblock %}

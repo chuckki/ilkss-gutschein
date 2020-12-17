@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Gutschein{% endblock %}
+
+{% block body %}
+    <h1>Edit Gutschein</h1>
+
+    {{ include('gutschein/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('gutschein_index') }}">zurück zur Liste</a>
+
+    {{ include('gutschein/_delete_form.html.twig') }}
+{% endblock %}

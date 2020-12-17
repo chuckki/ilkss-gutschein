@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gutschein{% endblock %}
+
+{% block body %}
+    <h1>Gutschein</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ gutschein.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ gutschein.gsName }}</td>
+            </tr>
+            <tr>
+                <th>Betrag</th>
+                <td>{{ gutschein.gsBetrag }}</td>
+            </tr>
+            <tr>
+                <th>Bemerkung</th>
+                <td>{{ gutschein.gsBemerkung }}</td>
+            </tr>
+            <tr>
+                <th>Datum</th>
+                <td>{{ gutschein.gsDate ? gutschein.gsDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Ist Bezahlt</th>
+                <td>{{ gutschein.isPayed ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Hash</th>
+                <td>{{ gutschein.hash }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('gutschein_index') }}">zurück zur Liste</a>
+
+    <a href="{{ path('gutschein_edit', {'id': gutschein.id}) }}">Ändern</a>
+
+    {{ include('gutschein/_delete_form.html.twig') }}
+{% endblock %}
