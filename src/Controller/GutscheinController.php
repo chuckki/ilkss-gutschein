@@ -22,8 +22,14 @@ class GutscheinController extends AbstractController
      */
     public function index(GutscheinRepository $gutscheinRepository): Response
     {
+        $allGutscheine = $gutscheinRepository->findAll();
+        $sum = 0;
+        foreach ($allGutscheine as $gutschein) {
+            $sum += $gutschein->getGsBetrag();
+        }
         return $this->render('gutschein/index.html.twig', [
-            'gutscheins' => $gutscheinRepository->findAll(),
+            'gutscheins' => $allGutscheine,
+            'sum' => $sum,
         ]);
     }
 
@@ -33,6 +39,7 @@ class GutscheinController extends AbstractController
     public function new(Request $request): Response
     {
         $gutschein = new Gutschein();
+        $gutschein->setUser($this->getUser());
         $form = $this->createForm(GutscheinType::class, $gutschein);
         $form->handleRequest($request);
 

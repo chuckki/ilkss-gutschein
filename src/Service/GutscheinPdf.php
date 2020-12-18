@@ -14,6 +14,7 @@ use App\Entity\Gutschein;
 use Doctrine\ORM\EntityManagerInterface;
 use setasign\Fpdi\PdfReader\PageBoundaries;
 use setasign\Fpdi\Tcpdf\Fpdi;
+use setasign\Fpdi\Tfpdf\FpdfTpl;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -55,7 +56,7 @@ class GutscheinPdf
     {
 
         $name = $gutschein->getGsName();
-        $betrag = number_format($gutschein->getGsBetrag()/100,2,',','.');
+        $betrag = number_format($gutschein->getGsBetrag(),2,',','.');
         $bemerkung = $gutschein->getGsBemerkung();
         $datumTag = $gutschein->getGsDate()->format('d');
         $datumMonat = $gutschein->getGsDate()->format('m');
@@ -67,7 +68,7 @@ class GutscheinPdf
 
         $pageId = 0;
         try {
-            $pdf->setSourceFile($this->rootDir.'/../ressources/DD_1704_IlovekitesurfSylt_Gutschein_02.pdf');
+            $pdf->setSourceFile($this->rootDir.'/../ressources/Gutschein-2.pdf');
             $pageId = $pdf->importPage(1, PageBoundaries::MEDIA_BOX);
             $pageId = $pdf->importPage(1);
         } catch (\Exception $e) {
@@ -75,16 +76,14 @@ class GutscheinPdf
         }
 
         $pdf->addPage('L');
-//        $pdf->useImportedPage($pageId,0,0,210.1,98.0,true);
         $size = $pdf->getTemplateSize($pageId);
 
         $pdf->useImportedPage($pageId,0,0,$size['width'],$size['height'],true);
 
-        //$pdf->useImportedPage($pageId,0,0,$size['width'],$size['height']);
+        $border = 0;
 
-        $border = 1;
-
-        $pdf->SetFont('Courier', '', 16);
+        //$pdf->SetFont('Courier', '', 16);
+        $pdf->SetFont('promptlight', '', 16);
         $pdf->SetTextColor(255,255,255);
         $pdf->SetTopMargin(0);
         $pdf->SetY(34);
@@ -99,28 +98,24 @@ class GutscheinPdf
         $pdf->SetX(142);
         $pdf->Cell(61, 5, $bemerkung, $border, 0, 'C');
 
-
-
         $pdf->setPageUnit('px');
 
         //$pdf->SetY(71);
-        $pdf->SetY(200,true);
-        $pdf->SetX(438);
-        $pdf->Cell(30, 40, $datumTag, 1,0,"J",true,'',0,false,"C");
-        //$pdf->Cell(30, 20, $datumTag, $border, 0, 'C');
+        $pdf->SetY(205,true);
+        $pdf->SetX(442);
+        $pdf->Cell(30, 20, $datumTag, 0, 0, 'L');
 
-        $pdf->SetY(71);
-        $pdf->SetX(167);
-        $pdf->Cell(12, 3, $datumMonat, $border, 0, 'C');
+        $pdf->SetY(205,true);
+        $pdf->SetX(480);
+        $pdf->Cell(30, 20, $datumMonat, 0, 0, 'L');
 
+        $pdf->SetY(205,true);
+        $pdf->SetX(520);
+        $pdf->Cell(30, 20, $datumJahr, 0, 0, 'L');
 
-        $pdf->SetY(71);
-        $pdf->SetX(180);
-        $pdf->Cell(23, 3, $datumJahr, $border, 0, 'C');
+        $pdf->Image($this->rootDir.'/../ressources/logo.png',55,10,130,'','PNG');
 
-
-
-        return new Response($pdf->Output('Gutschein_'.'_'.str_replace('.', '_', $name).'.pdf'), 200, ['Content-Type' => 'application/pdf']);
+        return new Response($pdf->Output('Gutschein'.'_'.str_replace('.', '_', $name).'.pdf'), 200, ['Content-Type' => 'application/pdf']);
     }
 
 }

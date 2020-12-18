@@ -25,7 +25,7 @@
             </tr>
             <tr>
                 <th>Datum</th>
-                <td>{{ gutschein.gsDate ? gutschein.gsDate|date('Y-m-d') : '' }}</td>
+                <td>{{ gutschein.gsDate ? gutschein.gsDate|date('d.m.Y') : '' }}</td>
             </tr>
             <tr>
                 <th>Ist Bezahlt</th>
@@ -40,7 +40,7 @@
 
     <a href="{{ path('gutschein_index') }}">zurück zur Liste</a>
 
-    <a href="{{ path('gutschein_edit', {'id': gutschein.id}) }}">Ändern</a>
+    <a class="btn btn-warning" href="{{ path('gutschein_edit', {'id': gutschein.id}) }}">Ändern</a>
 
     {{ include('gutschein/_delete_form.html.twig') }}
 {% endblock %}
