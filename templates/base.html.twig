@@ -1,19 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Welcome!{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href='{{ asset('bootstrap/css/bootstrap.min.css') }}'>
-    <!-- main css -->
     <link rel="stylesheet" href='{{ asset('css/main.css') }}'>
 
 
     {% block stylesheets %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" />
     {% endblock %}
 </head>
 <body>
@@ -47,25 +45,11 @@
                 -->
             </ul>
             <a class="btn btn-outline-primary form-inline my-2 my-lg-0" href="{{ path('app_logout')}}">Logout</a>
-            <!--
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-            </form>-->
         </div>
     </nav>
 
 {% endblock %}
-{#
-{% block header %}
-    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-        <h1 class="display-4">Gutschein</h1>
-        <p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap
-            example.
-            It’s built with default Bootstrap components and utilities with little customization.</p>
-    </div>
-{% endblock %}
-#}
+
 <main role="main" class="container">
     <div class="starter-template">
         {% block body %}
@@ -76,16 +60,16 @@
     </div>
 </main>
 
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src='{{ asset('js/jquery-3.2.1.slim.min.js') }}'></script>
 <script src='{{ asset('js/popper.min.js') }}'></script>
 <script src='{{ asset('bootstrap/js/bootstrap.min.js') }}'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.de.min.js" integrity="sha512-3V4cUR2MLZNeqi+4bPuXnotN7VESQC2ynlNH/fUljXZiQk1BGowTqO5O2gElABNMIXzzpYg5d8DxNoXKlM210w==" crossorigin="anonymous"></script>
 <script>
     $(document).ready(function() {
-        // you may need to change this code if you are not using Bootstrap Datepicker
         $('.js-datepicker').datepicker({
-            format: 'd.m.yy'
+            format: 'dd.mm.yyyy',
+            language: 'de'
         });
     });
 </script>

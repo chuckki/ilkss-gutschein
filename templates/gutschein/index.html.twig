@@ -9,10 +9,11 @@
         <thead>
             <tr>
                 <th>Name</th>
-                <th>Betrag</th>
-                <th class="d-none d-md-table-cell">Bemerkung</th>
-                <th class="d-none d-sm-table-cell">Datum</th>
-                <th>Bezahlt</th>
+                <th>Nummer</th>
+                <th class="d-none d-sm-table-cell">Betrag</th>
+                <th>Typ</th>
+                <th class="d-none d-md-table-cell">Datum</th>
+                <th class="d-none d-sm-table-cell">Bezahlt</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -20,10 +21,11 @@
         {% for gutschein in gutscheins %}
             <tr>
                 <td><a href="{{ path('gutschein_show', {'id': gutschein.id}) }}">{{ gutschein.gsName }}</a></td>
-                <td>{{ gutschein.gsBetrag | number_format(2, ',', '0')  }}€</td>
-                <td class="d-none d-md-table-cell">{{ gutschein.gsBemerkung }}</td>
-                <td class="d-none d-sm-table-cell">{{ gutschein.gsDate ? gutschein.gsDate|date('d.m.Y') : '' }}</td>
-                <td>{{ gutschein.isPayed ? 'Ja' : 'Nein' }}</td>
+                <td>{{ gutschein.gsnummer }}</td>
+                <td class="d-none d-sm-table-cell">{{ gutschein.gsBetrag | number_format(2, ',', '0')  }}€</td>
+                <td>{{ gutschein.KursTypName }}</td>
+                <td class="d-none d-md-table-cell">{{ gutschein.gsDate ? gutschein.gsDate|date('d.m.Y') : '' }}</td>
+                <td class="d-none d-sm-table-cell">{{ gutschein.isPayed ? 'Ja' : 'Nein' }}</td>
                 <td>
                     <a href="{{ path('gutschein_edit', {'id': gutschein.id}) }}"><i class="fas fa-edit"></i></a>
                     <a href="{{ path('gutschein_pdf_hash', {'hash': gutschein.hash}) }}"><i class="fas fa-print"></i></a>
@@ -31,7 +33,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="8">no records found</td>
+                <td colspan="8">Keine Gutscheine gefunden</td>
             </tr>
         {% endfor %}
         <tr><td></td><td><strong>{{ sum  | number_format(2, ',', '.')  }}€</strong></td></tr>

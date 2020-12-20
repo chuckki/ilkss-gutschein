@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\GutscheinRepository;
+use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -59,12 +61,17 @@ class Gutschein
     private $gs_nummer;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $kurstyp;
+
+    /**
      * Gutschein constructor.
      */
     public function __construct()
     {
         $this->isPayed = false;
-        $date = new \DateTime();
+        $date = new DateTime();
         $this->hash = hash('md5', $date->format('d.m.Y # H:i'));
     }
 
@@ -109,12 +116,12 @@ class Gutschein
         return $this;
     }
 
-    public function getGsDate(): ?\DateTimeInterface
+    public function getGsDate(): ?DateTimeInterface
     {
         return $this->gs_date;
     }
 
-    public function setGsDate(\DateTimeInterface $gs_date): self
+    public function setGsDate(DateTimeInterface $gs_date): self
     {
         $this->gs_date = $gs_date;
 
@@ -165,6 +172,31 @@ class Gutschein
     public function setGsNummer(string $gs_nummer): self
     {
         $this->gs_nummer = $gs_nummer;
+
+        return $this;
+    }
+
+    public function getKurstyp(): ?int
+    {
+        return $this->kurstyp;
+    }
+
+    public function getKursTypName(): string
+    {
+        switch ($this->kurstyp){
+            case 2:
+                return 'Grundkurs';
+            case 3:
+                return 'Schnupperkurs';
+            case 1:
+            default:
+                return 'Betrag';
+        }
+    }
+
+    public function setKurstyp(int $kurstyp): self
+    {
+        $this->kurstyp = $kurstyp;
 
         return $this;
     }
