@@ -37,11 +37,11 @@ class GutscheinType extends AbstractType
             )
         )->add(
             'gs_nummer',
-            TextType::class,
+            HiddenType::class,
             array(
                 'label'    => "Gutscheinnummer",
                 'required' => true,
-                'data'     => date("y").'-'.dechex(time()),
+                'empty_data' => date("y").'-'.dechex(time()),
                 'attr'     => ['maxlength' => 20],
             )
         )->add(
@@ -59,7 +59,7 @@ class GutscheinType extends AbstractType
                 'gs_bemerkung',
                 TextareaType::class,
                 array(
-                    'required' => true,
+                    'required' => false,
                     'label' => "Bemerkung (intern)"
                 )
             )->add(
