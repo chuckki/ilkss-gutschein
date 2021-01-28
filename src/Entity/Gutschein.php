@@ -184,13 +184,20 @@ class Gutschein
     public function getKursTypName(): string
     {
         switch ($this->kurstyp){
-            case 2:
-                return 'Grundkurs';
-            case 3:
-                return 'Schnupperkurs';
             case 1:
-            default:
                 return 'Betrag';
+            case 2:
+                return 'Kitesurf-Grundkurs';
+            case 3:
+                return 'Kitesurf-Schnupperkurs';
+            case 4:
+                return 'Kitesurf-Aufsteigerkurs';
+            case 5:
+                return 'Wingsurf-Aufsteigerkurs';
+            case 6:
+                return 'Wingsurf-Grundkurs';
+            default:
+                return 'null';
         }
     }
 
@@ -199,5 +206,18 @@ class Gutschein
         $this->kurstyp = $kurstyp;
 
         return $this;
+    }
+
+    public function getUrlString()
+    {
+        switch ($this->getKurstyp()){
+            case 2:
+            case 3:
+            case 4:
+                return 'www.ilovekitesurf-sylt.com';
+            case 5:
+            case 6:
+                return 'www.ilovewingsurf-sylt.com';
+        }
     }
 }

@@ -90,8 +90,24 @@ class GutscheinPdf
         $pdf->setPageOrientation('L', "off", 0);
         $pdf->SetMargins(0, 0, 0);
         $pageId = 0;
+
+        $wingImg = 'gutschein-wing.pdf';
+        $imgSrc = $kiteImg = 'gutschein-kite.pdf';
+
+        switch ($gutschein->getKurstyp()){
+            case 2:
+            case 3:
+            case 4:
+                $imgSrc = $kiteImg;
+                break;
+            case 5:
+            case 6:
+                $imgSrc = $wingImg;
+                break;
+        }
+
         try {
-            $pdf->setSourceFile($this->rootDir.'/../ressources/Gutschein-2.pdf');
+            $pdf->setSourceFile($this->rootDir.'/../ressources/'.$imgSrc);
             $pageId = $pdf->importPage(1);
         } catch (Exception $e) {
             // todo: something
@@ -124,6 +140,19 @@ class GutscheinPdf
             case 3:
                 $pdf->SetFont('prompt', '', 14);
                 $pdf->Cell(61, 5, "Kitesurf-Schnupperkurs", 0, 0, 'C', false, '', 2);
+                break;
+            case 4:
+                $pdf->SetFont('prompt', '', 14);
+                $pdf->Cell(61, 5, "Kitesurf-Aufsteigerkurs", 0, 0, 'C', false, '', 2);
+                break;
+            case 5:
+                $pdf->SetFont('prompt', '', 14);
+                $pdf->Cell(61, 5, "Wingsurf-Aufsteigerkurs", 0, 0, 'C', false, '', 2);
+                break;
+            case 6:
+                $pdf->SetFont('prompt', '', 18);
+                $pdf->Cell(61, 5, "Wingsurf-Grundkurs", 0, 0, 'C', false, '', 2);
+                break;
         }
 
         return $pdf;
@@ -178,7 +207,7 @@ class GutscheinPdf
         $pdf->Cell($width, $height, $text, 0, 0, 'L');
         $pdf->SetY($y, true, true);
         $pdf->SetX(0);
-        $pdf->Cell($width, $height, 'www.ilovekitesurf-sylt.com', 0, 0, 'C');
+        $pdf->Cell($width, $height, $gutschein->getUrlString() , 0, 0, 'C');
         $pdf->SetY($y, true, true);
         $pdf->SetX(0);
         $pdf->Cell($width, $height, ' 0173 396 666 9  ', 0, 0, 'R');

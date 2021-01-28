@@ -6,6 +6,7 @@ use App\Entity\Gutschein;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -25,7 +26,8 @@ class GutscheinType extends AbstractType
                 'required' => true,
                 'attr'     => ['maxlength' => 20],
                 'row_attr' => [
-                    'class' => 'myclass'
+                    'class' => 'myclass',
+                    'placeholder' => 'interner Name - wird nicht gedruckt'
                 ],
             )
         )->add(
@@ -34,6 +36,9 @@ class GutscheinType extends AbstractType
             array(
                 'label'    => "Betrag",
                 'required' => true,
+                'row_attr' => [
+                    'placeholder' => 'Betrag in Cent'
+                ],
             )
         )->add(
             'gs_nummer',
@@ -49,10 +54,25 @@ class GutscheinType extends AbstractType
             ChoiceType::class,
             [
                 'choices' => [
-                    'Betrag'        => 1,
-                    'Grundkurs'     => 2,
-                    'Schnupperkurs' => 3,
+                    'Betrag - Kite'        => 1,
+                    'Betrag - Wing in Planung'        => 0,
+                    'Kitesurf-Grundkurs'     => 2,
+                    'Kitesurf-Schnupperkurs' => 3,
+                    'Kitesurf-Aufsteigerkurs'     => 4,
+                    'Wingsurf-Grundkurs'     => 5,
+                    'Wingsurf-Aufsteigerkurs'     => 6,
                 ],
+                'group_by' => function ($choice, $key, $value) {
+
+                    if ($choice === 1 || $choice === 0) {
+                        return 'Betrag';
+                    }
+                    if ($choice <= 4) {
+                        return 'Kitesurfen';
+                    }
+
+                    return 'Wingsurfen';
+                },
                 'placeholder' => 'Gutschein wählen',
             ]
         )->add(
@@ -74,7 +94,13 @@ class GutscheinType extends AbstractType
                     // adds a class that can be selected in JavaScript
                     'attr'         => ['class' => 'js-datepicker'],
                 ]
-            )->add('isPayed')->add(
+            )->add(
+                'isPayed',
+                CheckboxType::class,
+                [
+                    'label_attr' => ['class' => 'switch-custom'],
+                ]
+            )->add(
                 'hash',
                 HiddenType::class,
                 array(
