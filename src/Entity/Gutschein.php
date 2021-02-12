@@ -192,9 +192,9 @@ class Gutschein
                 return 'Kitesurf-Schnupperkurs';
             case 4:
                 return 'Kitesurf-Aufsteigerkurs';
-            case 5:
-                return 'Wingsurf-Aufsteigerkurs';
             case 6:
+                return 'Wingsurf-Aufsteigerkurs';
+            case 5:
                 return 'Wingsurf-Grundkurs';
             default:
                 return 'null';

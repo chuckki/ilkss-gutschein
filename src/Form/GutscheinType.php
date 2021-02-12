@@ -99,6 +99,7 @@ class GutscheinType extends AbstractType
                 CheckboxType::class,
                 [
                     'label_attr' => ['class' => 'switch-custom'],
+                    'required' => false,
                 ]
             )->add(
                 'hash',

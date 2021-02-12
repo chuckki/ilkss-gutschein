@@ -122,7 +122,7 @@ class GutscheinPdf
         $pdf->SetY(12);
         $pdf->SetX(142);
         $pdf->Cell(61, 5, "GUTSCHEIN", 0, 0, 'C');
-        $pdf = $this->printImage($pdf);
+        $pdf = $this->printImage($pdf, $gutschein);
 
         return $pdf;
     }
@@ -145,11 +145,11 @@ class GutscheinPdf
                 $pdf->SetFont('prompt', '', 14);
                 $pdf->Cell(61, 5, "Kitesurf-Aufsteigerkurs", 0, 0, 'C', false, '', 2);
                 break;
-            case 5:
+            case 6:
                 $pdf->SetFont('prompt', '', 14);
                 $pdf->Cell(61, 5, "Wingsurf-Aufsteigerkurs", 0, 0, 'C', false, '', 2);
                 break;
-            case 6:
+            case 5:
                 $pdf->SetFont('prompt', '', 18);
                 $pdf->Cell(61, 5, "Wingsurf-Grundkurs", 0, 0, 'C', false, '', 2);
                 break;
@@ -175,11 +175,18 @@ class GutscheinPdf
         return $pdf;
     }
 
-    private function printImage(Fpdi $pdf): Fpdi
+    private function printImage(Fpdi $pdf, Gutschein $gutschein): Fpdi
     {
-        return $pdf;
+
+        switch ($gutschein->getKurstyp()){
+            case 2:
+            case 3:
+            case 4:
+                return $pdf;
+        }
+
         $pdf->setPageUnit('px');
-        $pdf->Image($this->rootDir.'/../ressources/logo-weiss.png', 55, 10, 130, '', 'PNG');
+        $pdf->Image($this->rootDir.'/../ressources/SH_Wing_Surf-02.png', 55, 10, 130, '', 'PNG');
         //$pdf->Image($this->rootDir.'/../ressources/logo-weiss.png', 60, 10, 120, '', 'PNG');
         $pdf->setPageUnit('mm');
 
