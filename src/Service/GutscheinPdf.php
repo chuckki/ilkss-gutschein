@@ -13,7 +13,6 @@ use App\Entity\Gutschein;
 use Exception;
 use setasign\Fpdi\Tcpdf\Fpdi;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 class GutscheinPdf
 {
@@ -260,7 +259,7 @@ class GutscheinPdf
         return $pdf;
     }
 
-    private function setDatumOldFormat(Fpdi $pdf, DateTime $dateValue): Fpdi
+    private function setDatumOldFormat(Fpdi $pdf, \DateTime $dateValue): Fpdi
     {
         $datumTag   = $dateValue->format('d');
         $datumMonat = $dateValue->format('m');
