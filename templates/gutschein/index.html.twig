@@ -28,7 +28,7 @@
                 <td class="d-none d-sm-table-cell">{{ gutschein.isPayed ? 'Ja' : 'Nein' }}</td>
                 <td>
                     <a href="{{ path('gutschein_edit', {'id': gutschein.id}) }}"><i class="fas fa-edit"></i></a>
-                    <a href="{{ path('gutschein_pdf_hash', {'hash': gutschein.hash}) }}"><i class="fas fa-print"></i></a>
+                    <a target="_blank" href="{{ path('gutschein_pdf_hash', {'hash': gutschein.hash}) }}"><i class="fas fa-print"></i></a>
                 </td>
             </tr>
         {% else %}

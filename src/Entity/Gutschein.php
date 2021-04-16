@@ -196,6 +196,8 @@ class Gutschein
                 return 'Wingsurf-Aufsteigerkurs';
             case 5:
                 return 'Wingsurf-Grundkurs';
+            case 7:
+                return '3h Kitetraining';
             default:
                 return 'null';
         }
@@ -208,7 +210,7 @@ class Gutschein
         return $this;
     }
 
-    public function getUrlString()
+    public function getUrlString(): string
     {
         switch ($this->getKurstyp()){
             case 2:
@@ -219,5 +221,7 @@ class Gutschein
             case 6:
                 return 'www.ilovewingsurf-sylt.com';
         }
+
+        return '';
     }
 }

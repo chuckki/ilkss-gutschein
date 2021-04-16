@@ -56,8 +56,9 @@ class GutscheinType extends AbstractType
                 'choices' => [
                     'Betrag - Kite'        => 1,
                     'Betrag - Wing in Planung'        => 0,
-                    'Kitesurf-Grundkurs'     => 2,
                     'Kitesurf-Schnupperkurs' => 3,
+                    '3h Kitesurftraining' => 7,
+                    'Kitesurf-Grundkurs'     => 2,
                     'Kitesurf-Aufsteigerkurs'     => 4,
                     'Wingsurf-Grundkurs'     => 5,
                     'Wingsurf-Aufsteigerkurs'     => 6,
@@ -67,7 +68,7 @@ class GutscheinType extends AbstractType
                     if ($choice === 1 || $choice === 0) {
                         return 'Betrag';
                     }
-                    if ($choice <= 4) {
+                    if ($choice <= 4 || $choice === 7) {
                         return 'Kitesurfen';
                     }
 

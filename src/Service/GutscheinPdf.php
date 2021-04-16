@@ -97,6 +97,7 @@ class GutscheinPdf
             case 2:
             case 3:
             case 4:
+            case 7:
                 $imgSrc = $kiteImg;
                 break;
             case 5:
@@ -152,6 +153,10 @@ class GutscheinPdf
                 $pdf->SetFont('prompt', '', 18);
                 $pdf->Cell(61, 5, "Wingsurf-Grundkurs", 0, 0, 'C', false, '', 2);
                 break;
+            case 7:
+                $pdf->SetFont('prompt', '', 18);
+                $pdf->Cell(61, 5, "3h Kitesurftraining", 0, 0, 'C', false, '', 2);
+                break;
         }
 
         return $pdf;
@@ -181,6 +186,7 @@ class GutscheinPdf
             case 2:
             case 3:
             case 4:
+            case 7:
                 return $pdf;
         }
 
