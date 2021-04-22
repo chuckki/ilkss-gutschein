@@ -216,6 +216,7 @@ class Gutschein
             case 2:
             case 3:
             case 4:
+            case 7:
                 return 'www.ilovekitesurf-sylt.com';
             case 5:
             case 6:
