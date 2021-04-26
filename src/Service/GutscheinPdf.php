@@ -112,7 +112,7 @@ class GutscheinPdf
         } catch (Exception $e) {
             // todo: something
         }
-        $pdf->addPage('L');
+        $pdf->AddPage('L');
         $size = $pdf->getTemplateSize($pageId);
         $pdf->useImportedPage($pageId, 0, 0, $size['width'], $size['height'], true);
         $pdf = $this->setBoxes($pdf);
@@ -166,6 +166,12 @@ class GutscheinPdf
     {
         // build transparent boxes
         $pdf->setAlpha(0.2);
+/*
+        $pdf->SetY(24, true, true);
+        $pdf->SetX(143);
+        $pdf->setColor('fill', 255, 255, 255);
+        $pdf->Cell(59, 7, '', 0, 0, 'C', true);
+*/
         $pdf->SetY(34, true, true);
         $pdf->SetX(143);
         $pdf->setColor('fill', 255, 255, 255);
